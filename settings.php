@@ -24,16 +24,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>
-    
-    <div class="container">
-        <div class="page-header">
-            <h1>System Settings</h1>
-        </div>
-        
+
+    <main class="container">
+        <header class="page-header">
+            <div>
+                <h1>System Settings</h1>
+                <p>Configure and manage application preferences</p>
+            </div>
+        </header>
+
         <?php if ($message): ?>
-            <div class="alert alert-success"><?php echo $message; ?></div>
+            <div class="alert alert-success"><?php echo htmlspecialchars($message); ?></div>
         <?php endif; ?>
-        
+
         <form method="POST">
             <div class="card">
                 <div class="card-header">
@@ -43,11 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php while ($setting = mysqli_fetch_assoc($settings)): ?>
                         <div class="form-group">
                             <label><?php echo htmlspecialchars($setting['setting_key']); ?></label>
-                            <input type="text" 
-                                   name="setting[<?php echo $setting['setting_key']; ?>]" 
-                                   value="<?php echo htmlspecialchars($setting['setting_value']); ?>" 
+                            <input type="text"
+                                   name="setting[<?php echo htmlspecialchars($setting['setting_key']); ?>]"
+                                   value="<?php echo htmlspecialchars($setting['setting_value']); ?>"
                                    class="form-control">
-                            <small class="text-muted"><?php echo htmlspecialchars($setting['description']); ?></small>
+                            <span class="form-hint"><?php echo htmlspecialchars($setting['description']); ?></span>
                         </div>
                     <?php endwhile; ?>
                 </div>
@@ -56,6 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
         </form>
-    </div>
+    </main>
 </body>
 </html>

@@ -19,44 +19,40 @@ $categories = ['sales', 'traffic', 'users', 'revenue', 'performance', 'engagemen
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <?php include 'includes/navbar.php'; ?>
-    
-    <div class="container">
-        <div class="page-header">
-            <h1>Analytics Dashboard</h1>
-        </div>
-        
-        <!-- Filters -->
-        <div class="card">
-            <div class="card-body">
-                <form method="GET" class="filters-form">
-                    <div class="form-group">
-                        <label>Category</label>
-                        <select name="category" class="form-control">
-                            <option value="">All Categories</option>
-                            <?php foreach ($categories as $cat): ?>
-                                <option value="<?php echo $cat; ?>" <?php echo $category === $cat ? 'selected' : ''; ?>>
-                                    <?php echo ucfirst($cat); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Time Period</label>
-                        <select name="days" class="form-control">
-                            <option value="7" <?php echo $days === 7 ? 'selected' : ''; ?>>Last 7 Days</option>
-                            <option value="30" <?php echo $days === 30 ? 'selected' : ''; ?>>Last 30 Days</option>
-                            <option value="90" <?php echo $days === 90 ? 'selected' : ''; ?>>Last 90 Days</option>
-                            <option value="365" <?php echo $days === 365 ? 'selected' : ''; ?>>Last Year</option>
-                        </select>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary">Apply Filters</button>
-                    <a href="analytics.php" class="btn btn-outline">Clear</a>
-                </form>
-            </div>
-        </div>
+        <?php include 'includes/navbar.php'; ?>
+        <main class="container">
+            <header class="page-header">
+                <div>
+                    <h1>Analytics</h1>
+                    <p>Monitor metrics, categories, and performance data</p>
+                </div>
+            </header>
+            <section class="card" aria-label="Analytics Filters">
+                <div class="card-body">
+                    <form method="GET" class="filters-form" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;align-items:end;">
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select name="category" id="category" class="form-control">
+                                <option value="">All Categories</option>
+                                <?php foreach ($categories as $cat): ?>
+                                    <option value="<?php echo $cat; ?>" <?php echo $category === $cat ? 'selected' : ''; ?>><?php echo ucfirst($cat); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="days">Time Period</label>
+                            <select name="days" id="days" class="form-control">
+                                <option value="7" <?php echo $days === 7 ? 'selected' : ''; ?>>Last 7 Days</option>
+                                <option value="30" <?php echo $days === 30 ? 'selected' : ''; ?>>Last 30 Days</option>
+                                <option value="90" <?php echo $days === 90 ? 'selected' : ''; ?>>Last 90 Days</option>
+                                <option value="365" <?php echo $days === 365 ? 'selected' : ''; ?>>Last Year</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Apply Filters</button>
+                        <a href="analytics.php" class="btn btn-outline">Clear</a>
+                    </form>
+                </div>
+            </section>
         
         <!-- Analytics Data -->
         <div class="card">
@@ -95,7 +91,7 @@ $categories = ['sales', 'traffic', 'users', 'revenue', 'performance', 'engagemen
                 </div>
             </div>
         </div>
-    </div>
+        </main>
     
     <script>
         function exportData() {

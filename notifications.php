@@ -15,14 +15,20 @@ $notifications = getUserNotifications($_SESSION['user_id']);
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>
-    
-    <div class="container">
-        <div class="page-header">
-            <h1>Notifications</h1>
-            <button class="btn btn-outline" onclick="markAllAsRead()">✓ Mark All as Read</button>
-        </div>
-        
+
+    <main class="container">
+        <header class="page-header">
+            <div>
+                <h1>Notifications</h1>
+                <p>Your latest alerts and system messages</p>
+            </div>
+            <button class="btn btn-ghost" onclick="markAllAsRead()">✓ Mark All as Read</button>
+        </header>
+
         <div class="card">
+            <div class="card-header">
+                <h3>Inbox</h3>
+            </div>
             <div class="card-body">
                 <div class="notifications-list">
                     <?php while ($notif = mysqli_fetch_assoc($notifications)): ?>
@@ -41,7 +47,7 @@ $notifications = getUserNotifications($_SESSION['user_id']);
                 </div>
             </div>
         </div>
-    </div>
+    </main>
     
     <script>
         function markAllAsRead() {

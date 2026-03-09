@@ -15,16 +15,22 @@ $users = getAllUsers();
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>
-    
-    <div class="container">
-        <div class="page-header">
-            <h1>User Management</h1>
+
+    <main class="container">
+        <header class="page-header">
+            <div>
+                <h1>User Management</h1>
+                <p>Manage all users, roles, and permissions</p>
+            </div>
             <?php if (isSuperAdmin()): ?>
                 <a href="add-user.php" class="btn btn-primary">➕ Add User</a>
             <?php endif; ?>
-        </div>
-        
+        </header>
+
         <div class="card">
+            <div class="card-header">
+                <h3>All Users</h3>
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table">
@@ -72,6 +78,6 @@ $users = getAllUsers();
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 </body>
 </html>

@@ -19,195 +19,149 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <?php include 'includes/navbar.php'; ?>
-    
-    <div class="container">
-        <div class="page-header">
-            <div>
-                <h1>Dashboard</h1>
-                <p>Welcome back, <?php echo $_SESSION['full_name']; ?>!</p>
-            </div>
-            <div class="header-actions">
-                <span class="current-time" id="currentTime"></span>
-            </div>
-        </div>
-        
-        <!-- Stats Grid -->
-        <div class="stats-grid">
-            <div class="stat-card stat-blue">
-                <div class="stat-icon">💰</div>
-                <div class="stat-info">
-                    <h3><?php echo formatCurrency($dashboardStats['today_sales']); ?></h3>
-                    <p>Today's Sales</p>
-                    <span class="stat-trend up">+12.5%</span>
+        <?php include 'includes/navbar.php'; ?>
+        <main class="container">
+            <header class="page-header">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p style="color:var(--text-secondary);font-size:1.1rem;">Welcome back, <?php echo $_SESSION['full_name']; ?>!</p>
                 </div>
-            </div>
-            
-            <div class="stat-card stat-green">
-                <div class="stat-icon">📈</div>
-                <div class="stat-info">
-                    <h3><?php echo formatCurrency($dashboardStats['monthly_revenue']); ?></h3>
-                    <p>Monthly Revenue</p>
-                    <span class="stat-trend up">+8.3%</span>
+                <div class="header-actions">
+                    <span class="current-time" id="currentTime" aria-label="Current time"></span>
                 </div>
-            </div>
-            
-            <div class="stat-card stat-purple">
-                <div class="stat-icon">👥</div>
-                <div class="stat-info">
-                    <h3><?php echo formatNumber($dashboardStats['active_users']); ?></h3>
-                    <p>Active Users</p>
-                    <span class="stat-trend up">+5.2%</span>
-                </div>
-            </div>
-            
-            <div class="stat-card stat-orange">
-                <div class="stat-icon">👤</div>
-                <div class="stat-info">
-                    <h3><?php echo formatNumber($dashboardStats['new_users_today']); ?></h3>
-                    <p>New Users Today</p>
-                    <span class="stat-trend up">+15</span>
-                </div>
-            </div>
-            
-            <div class="stat-card stat-cyan">
-                <div class="stat-icon">🌐</div>
-                <div class="stat-info">
-                    <h3><?php echo formatNumber($dashboardStats['today_traffic']); ?></h3>
-                    <p>Today's Traffic</p>
-                    <span class="stat-trend up">+6.8%</span>
-                </div>
-            </div>
-            
-            <div class="stat-card stat-yellow">
-                <div class="stat-icon">⚡</div>
-                <div class="stat-info">
-                    <h3><?php echo formatNumber($dashboardStats['avg_response_time'], 1); ?>ms</h3>
-                    <p>Avg Response Time</p>
-                    <span class="stat-trend down">-18ms</span>
-                </div>
-            </div>
-            
-            <div class="stat-card stat-pink">
-                <div class="stat-icon">📊</div>
-                <div class="stat-info">
-                    <h3><?php echo formatNumber($dashboardStats['bounce_rate'], 1); ?>%</h3>
-                    <p>Bounce Rate</p>
-                    <span class="stat-trend down">-2.3%</span>
-                </div>
-            </div>
-            
-            <div class="stat-card stat-success">
-                <div class="stat-icon">✅</div>
-                <div class="stat-info">
-                    <h3><?php echo formatNumber($dashboardStats['server_uptime'], 2); ?>%</h3>
-                    <p>Server Uptime</p>
-                    <span class="stat-trend stable">Stable</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Charts Row -->
-        <div class="charts-row">
-            <div class="card chart-card">
-                <div class="card-header">
-                    <h3>Sales Overview (Last 7 Days)</h3>
-                    <div class="card-actions">
-                        <select class="form-control form-control-sm">
-                            <option>Last 7 Days</option>
-                            <option>Last 30 Days</option>
-                            <option>Last 3 Months</option>
-                        </select>
+            </header>
+
+            <section aria-label="Statistics" class="stats-grid">
+                <div class="stat-card stat-blue">
+                    <div class="stat-icon-wrap">💰</div>
+                    <div class="stat-info">
+                        <h3><?php echo formatCurrency($dashboardStats['today_sales']); ?></h3>
+                        <p>Today's Sales</p>
+                        <span class="stat-trend trend-up">↑ +12.5%</span>
                     </div>
                 </div>
-                <div class="card-body">
-                    <canvas id="salesChart"></canvas>
-                </div>
-            </div>
-            
-            <div class="card chart-card">
-                <div class="card-header">
-                    <h3>Traffic Analytics (Last 7 Days)</h3>
-                    <div class="card-actions">
-                        <select class="form-control form-control-sm">
-                            <option>Last 7 Days</option>
-                            <option>Last 30 Days</option>
-                            <option>Last 3 Months</option>
-                        </select>
+                <div class="stat-card stat-green">
+                    <div class="stat-icon-wrap">📈</div>
+                    <div class="stat-info">
+                        <h3><?php echo formatCurrency($dashboardStats['monthly_revenue']); ?></h3>
+                        <p>Monthly Revenue</p>
+                        <span class="stat-trend trend-up">↑ +8.3%</span>
                     </div>
                 </div>
-                <div class="card-body">
-                    <canvas id="trafficChart"></canvas>
+                <div class="stat-card stat-purple">
+                    <div class="stat-icon-wrap">👥</div>
+                    <div class="stat-info">
+                        <h3><?php echo formatNumber($dashboardStats['active_users']); ?></h3>
+                        <p>Active Users</p>
+                        <span class="stat-trend trend-up">↑ +5.2%</span>
+                    </div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Bottom Row -->
-        <div class="bottom-row">
-            <!-- User Statistics -->
-            <div class="card">
-                <div class="card-header">
-                    <h3>User Statistics</h3>
-                    <a href="users.php" class="btn btn-sm btn-outline">View All</a>
+                <div class="stat-card stat-orange">
+                    <div class="stat-icon-wrap">👤</div>
+                    <div class="stat-info">
+                        <h3><?php echo formatNumber($dashboardStats['new_users_today']); ?></h3>
+                        <p>New Users Today</p>
+                        <span class="stat-trend trend-up">↑ +15</span>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="user-stats-grid">
-                        <div class="user-stat-item">
-                            <div class="stat-label">Total Users</div>
-                            <div class="stat-value"><?php echo formatNumber($userStats['total_users']); ?></div>
-                        </div>
-                        <div class="user-stat-item">
-                            <div class="stat-label">Active</div>
-                            <div class="stat-value text-success"><?php echo formatNumber($userStats['active_users']); ?></div>
-                        </div>
-                        <div class="user-stat-item">
-                            <div class="stat-label">Inactive</div>
-                            <div class="stat-value text-secondary"><?php echo formatNumber($userStats['inactive_users']); ?></div>
-                        </div>
-                        <div class="user-stat-item">
-                            <div class="stat-label">Suspended</div>
-                            <div class="stat-value text-danger"><?php echo formatNumber($userStats['suspended_users']); ?></div>
-                        </div>
-                        <div class="user-stat-item">
-                            <div class="stat-label">New Today</div>
-                            <div class="stat-value text-primary"><?php echo formatNumber($userStats['new_today']); ?></div>
-                        </div>
-                        <div class="user-stat-item">
-                            <div class="stat-label">Logged In Today</div>
-                            <div class="stat-value text-info"><?php echo formatNumber($userStats['logged_in_today']); ?></div>
+                <div class="stat-card stat-cyan">
+                    <div class="stat-icon-wrap">🌐</div>
+                    <div class="stat-info">
+                        <h3><?php echo formatNumber($dashboardStats['today_traffic']); ?></h3>
+                        <p>Today's Traffic</p>
+                        <span class="stat-trend trend-up">↑ +6.8%</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-yellow">
+                    <div class="stat-icon-wrap">⚡</div>
+                    <div class="stat-info">
+                        <h3><?php echo formatNumber($dashboardStats['avg_response_time'], 1); ?>ms</h3>
+                        <p>Avg Response Time</p>
+                        <span class="stat-trend trend-down">↓ -18ms</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-pink">
+                    <div class="stat-icon-wrap">📊</div>
+                    <div class="stat-info">
+                        <h3><?php echo formatNumber($dashboardStats['bounce_rate'], 1); ?>%</h3>
+                        <p>Bounce Rate</p>
+                        <span class="stat-trend trend-down">↓ -2.3%</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-success">
+                    <div class="stat-icon-wrap">✅</div>
+                    <div class="stat-info">
+                        <h3><?php echo formatNumber($dashboardStats['server_uptime'], 2); ?>%</h3>
+                        <p>Server Uptime</p>
+                        <span class="stat-trend trend-stable">● Stable</span>
+                    </div>
+                </div>
+            </section>
+
+            <section aria-label="Charts" class="charts-row">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-primary">Sales Overview</h3>
+                        <span class="badge badge-primary">Last 7 Days</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-canvas-wrap">
+                            <canvas id="salesChart" aria-label="Sales chart"></canvas>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Recent Activity -->
-            <div class="card">
-                <div class="card-header">
-                    <h3>Recent Activity</h3>
-                    <a href="activity.php" class="btn btn-sm btn-outline">View All</a>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-purple">Traffic Analytics</h3>
+                        <span class="badge badge-purple">Last 7 Days</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-canvas-wrap">
+                            <canvas id="trafficChart" aria-label="Traffic chart"></canvas>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="activity-list">
-                        <?php while ($activity = mysqli_fetch_assoc($recentActivity)): ?>
-                            <div class="activity-item">
-                                <div class="activity-icon"><?php echo getActivityIcon($activity['activity_type']); ?></div>
-                                <div class="activity-content">
-                                    <p><?php echo htmlspecialchars($activity['activity_description']); ?></p>
-                                    <small>
-                                        <?php echo htmlspecialchars($activity['full_name'] ?? 'System'); ?> • 
-                                        <?php echo timeAgo($activity['created_at']); ?>
-                                    </small>
+            </section>
+
+            <section class="bottom-row">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-success">User Statistics</h3>
+                        <a href="users.php" class="btn btn-sm btn-ghost">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="user-stats-grid">
+                            <div class="user-stat-item"><div class="stat-label">Total Users</div><div class="stat-value"><?php echo formatNumber($userStats['total_users']); ?></div></div>
+                            <div class="user-stat-item"><div class="stat-label">Active</div><div class="stat-value text-success"><?php echo formatNumber($userStats['active_users']); ?></div></div>
+                            <div class="user-stat-item"><div class="stat-label">Inactive</div><div class="stat-value text-secondary"><?php echo formatNumber($userStats['inactive_users']); ?></div></div>
+                            <div class="user-stat-item"><div class="stat-label">Suspended</div><div class="stat-value text-danger"><?php echo formatNumber($userStats['suspended_users']); ?></div></div>
+                            <div class="user-stat-item"><div class="stat-label">New Today</div><div class="stat-value text-primary"><?php echo formatNumber($userStats['new_today']); ?></div></div>
+                            <div class="user-stat-item"><div class="stat-label">Logged In Today</div><div class="stat-value text-info"><?php echo formatNumber($userStats['logged_in_today']); ?></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-warning">Recent Activity</h3>
+                        <a href="activity.php" class="btn btn-sm btn-ghost">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="activity-list">
+                            <?php while ($activity = mysqli_fetch_assoc($recentActivity)): ?>
+                                <div class="activity-item">
+                                    <div class="activity-icon"><?php echo getActivityIcon($activity['activity_type']); ?></div>
+                                    <div class="activity-content">
+                                        <p><?php echo htmlspecialchars($activity['activity_description']); ?></p>
+                                        <small><?php echo htmlspecialchars($activity['full_name'] ?? 'System'); ?> • <?php echo timeAgo($activity['created_at']); ?></small>
+                                    </div>
+                                    <span class="badge badge-<?php echo getStatusBadge($activity['activity_type']); ?>"><?php echo ucfirst($activity['activity_type']); ?></span>
                                 </div>
-                                <span class="badge badge-<?php echo getStatusBadge($activity['activity_type']); ?>">
-                                    <?php echo ucfirst($activity['activity_type']); ?>
-                                </span>
-                            </div>
-                        <?php endwhile; ?>
+                            <?php endwhile; ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            </section>
+        </main>
     
     <script src="js/dashboard.js"></script>
     <script>
@@ -221,6 +175,7 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
         
         // Sales Chart
         const salesCtx = document.getElementById('salesChart').getContext('2d');
+        document.getElementById('salesChart').style.height = '100%';
         const salesData = <?php 
             $dates = [];
             $values = [];

@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="login-container">
         <div class="login-card">
             <div class="login-header">
-                <div class="logo">📊</div>
+                <span class="logo">📊</span>
                 <h1><?php echo SITE_NAME; ?></h1>
                 <p><?php echo SITE_TITLE; ?></p>
             </div>

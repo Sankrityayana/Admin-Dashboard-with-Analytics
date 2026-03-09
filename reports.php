@@ -15,14 +15,21 @@ $reports = getAllReports();
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>
-    
-    <div class="container">
-        <div class="page-header">
-            <h1>Reports</h1>
+
+    <main class="container">
+        <header class="page-header">
+            <div>
+                <h1>Reports</h1>
+                <p>View and manage generated reports</p>
+            </div>
             <button class="btn btn-primary" onclick="generateReport()">📊 Generate Report</button>
-        </div>
-        
+        </header>
+
         <div class="card">
+            <div class="card-header">
+                <h3>All Reports</h3>
+                <span class="badge badge-secondary">Generated</span>
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table">
@@ -41,23 +48,12 @@ $reports = getAllReports();
                         <tbody>
                             <?php while ($report = mysqli_fetch_assoc($reports)): ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($report['report_name']); ?></td>
-                                    <td>
-                                        <span class="badge badge-info">
-                                            <?php echo ucfirst($report['report_type']); ?>
-                                        </span>
-                                    </td>
+                                    <td><strong><?php echo htmlspecialchars($report['report_name']); ?></strong></td>
+                                    <td><span class="badge badge-info"><?php echo ucfirst($report['report_type']); ?></span></td>
                                     <td><?php echo strtoupper($report['report_format']); ?></td>
-                                    <td>
-                                        <?php echo formatDate($report['date_from']); ?> - 
-                                        <?php echo formatDate($report['date_to']); ?>
-                                    </td>
+                                    <td><?php echo formatDate($report['date_from']); ?> → <?php echo formatDate($report['date_to']); ?></td>
                                     <td><?php echo htmlspecialchars($report['generated_by_name']); ?></td>
-                                    <td>
-                                        <span class="badge badge-<?php echo getStatusBadge($report['status']); ?>">
-                                            <?php echo ucfirst($report['status']); ?>
-                                        </span>
-                                    </td>
+                                    <td><span class="badge badge-<?php echo getStatusBadge($report['status']); ?>"><?php echo ucfirst($report['status']); ?></span></td>
                                     <td><?php echo formatDateTime($report['created_at']); ?></td>
                                     <td>
                                         <?php if ($report['status'] === 'completed'): ?>
@@ -71,15 +67,14 @@ $reports = getAllReports();
                 </div>
             </div>
         </div>
-    </div>
-    
+    </main>
+
     <script>
         function generateReport() {
             alert('Report generation dialog would appear here');
         }
-        
         function downloadReport(id) {
-            alert('Download report #' + id);
+            alert('Downloading report #' + id);
         }
     </script>
 </body>

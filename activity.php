@@ -15,14 +15,21 @@ $activityLogs = getActivityLogs(100);
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>
-    
-    <div class="container">
-        <div class="page-header">
-            <h1>Activity Log</h1>
-            <button class="btn btn-outline" onclick="exportLogs()">📥 Export Logs</button>
-        </div>
-        
+
+    <main class="container">
+        <header class="page-header">
+            <div>
+                <h1>Activity Log</h1>
+                <p>Real-time system and user activity feed</p>
+            </div>
+            <button class="btn btn-ghost" onclick="exportLogs()">📥 Export Logs</button>
+        </header>
+
         <div class="card">
+            <div class="card-header">
+                <h3>Recent Events</h3>
+                <span class="badge badge-primary">Last 100</span>
+            </div>
             <div class="card-body">
                 <div class="activity-list">
                     <?php while ($activity = mysqli_fetch_assoc($activityLogs)): ?>
@@ -31,20 +38,18 @@ $activityLogs = getActivityLogs(100);
                             <div class="activity-content">
                                 <p><?php echo htmlspecialchars($activity['activity_description']); ?></p>
                                 <small>
-                                    <strong><?php echo htmlspecialchars($activity['full_name'] ?? 'System'); ?></strong> • 
-                                    <?php echo timeAgo($activity['created_at']); ?> • 
+                                    <strong><?php echo htmlspecialchars($activity['full_name'] ?? 'System'); ?></strong> &bull;
+                                    <?php echo timeAgo($activity['created_at']); ?> &bull;
                                     IP: <?php echo htmlspecialchars($activity['ip_address']); ?>
                                 </small>
                             </div>
-                            <span class="badge badge-<?php echo getStatusBadge($activity['activity_type']); ?>">
-                                <?php echo ucfirst($activity['activity_type']); ?>
-                            </span>
+                            <span class="badge badge-<?php echo getStatusBadge($activity['activity_type']); ?>"><?php echo ucfirst($activity['activity_type']); ?></span>
                         </div>
                     <?php endwhile; ?>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
     
     <script>
         function exportLogs() {
