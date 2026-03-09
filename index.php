@@ -23,7 +23,7 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
     <main class="container">
         <header class="page-header">
             <div>
-                <h1>👋 Welcome back, <span><?php echo htmlspecialchars($_SESSION['full_name']); ?></span></h1>
+                <h1>Welcome back, <span><?php echo htmlspecialchars($_SESSION['full_name']); ?></span></h1>
                 <p>Here's what's happening with your dashboard today.</p>
             </div>
             <div class="page-header-actions">
@@ -101,7 +101,7 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
             <section aria-label="Charts" class="charts-row">
             <div class="card">
                     <div class="card-header">
-                        <h3 class="text-primary"><span class="card-header-icon">📈</span> Sales Overview</h3>
+                        <h3>Sales Overview</h3>
                         <span class="badge badge-primary">Last 7 Days</span>
                     </div>
                     <div class="card-body">
@@ -112,7 +112,7 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
                 </div>
             <div class="card">
                     <div class="card-header">
-                        <h3 class="text-purple"><span class="card-header-icon">🌐</span> Traffic Analytics</h3>
+                        <h3>Traffic Analytics</h3>
                         <span class="badge badge-purple">Last 7 Days</span>
                     </div>
                     <div class="card-body">
@@ -126,7 +126,7 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
         <section class="bottom-row">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="text-success"><span class="card-header-icon">👥</span> User Statistics</h3>
+                        <h3>User Statistics</h3>
                         <a href="users.php" class="btn btn-sm btn-ghost">View All →</a>
                     </div>
                     <div class="card-body">
@@ -142,7 +142,7 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
                 </div>
             <div class="card">
                     <div class="card-header">
-                        <h3 class="text-warning"><span class="card-header-icon">⚡</span> Recent Activity</h3>
+                        <h3>Recent Activity</h3>
                         <a href="activity.php" class="btn btn-sm btn-ghost">View All →</a>
                     </div>
                     <div class="card-body">
@@ -173,9 +173,17 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
         updateTime();
         setInterval(updateTime, 1000);
         
+        function getChartTheme() {
+            var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+            return {
+                grid:   dark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)',
+                tick:   dark ? '#94A3B8' : '#64748B',
+                legend: dark ? '#94A3B8' : '#64748B'
+            };
+        }
+
         // Sales Chart
         const salesCtx = document.getElementById('salesChart').getContext('2d');
-        document.getElementById('salesChart').style.height = '100%';
         const salesData = <?php 
             $dates = [];
             $values = [];
@@ -186,7 +194,8 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
             }
             echo json_encode(['dates' => array_reverse($dates), 'values' => array_reverse($values)]);
         ?>;
-        
+
+        var th = getChartTheme();
         new Chart(salesCtx, {
             type: 'line',
             data: {
@@ -194,35 +203,26 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
                 datasets: [{
                     label: 'Sales',
                     data: salesData.values,
-                    borderColor: '#00d4ff',
-                    backgroundColor: 'rgba(0, 212, 255, 0.1)',
-                    borderWidth: 3,
+                    borderColor: '#2563EB',
+                    backgroundColor: 'rgba(37,99,235,0.08)',
+                    borderWidth: 2,
                     tension: 0.4,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#2563EB',
                     fill: true
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: { color: '#e0e0e0' }
-                    }
-                },
+                plugins: { legend: { labels: { color: th.legend, font: { size: 12 } } } },
                 scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                        ticks: { color: '#e0e0e0' }
-                    },
-                    x: {
-                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                        ticks: { color: '#e0e0e0' }
-                    }
+                    y: { beginAtZero: true, grid: { color: th.grid }, ticks: { color: th.tick } },
+                    x: { grid: { color: th.grid }, ticks: { color: th.tick } }
                 }
             }
         });
-        
+
         // Traffic Chart
         const trafficCtx = document.getElementById('trafficChart').getContext('2d');
         const trafficData = <?php 
@@ -235,7 +235,7 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
             }
             echo json_encode(['dates' => array_reverse($dates), 'values' => array_reverse($values)]);
         ?>;
-        
+
         new Chart(trafficCtx, {
             type: 'bar',
             data: {
@@ -243,29 +243,19 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
                 datasets: [{
                     label: 'Page Views',
                     data: trafficData.values,
-                    backgroundColor: '#bb86fc',
-                    borderColor: '#bb86fc',
-                    borderWidth: 2
+                    backgroundColor: 'rgba(124,58,237,0.75)',
+                    borderColor: '#7C3AED',
+                    borderWidth: 1,
+                    borderRadius: 4
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: { color: '#e0e0e0' }
-                    }
-                },
+                plugins: { legend: { labels: { color: th.legend, font: { size: 12 } } } },
                 scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                        ticks: { color: '#e0e0e0' }
-                    },
-                    x: {
-                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                        ticks: { color: '#e0e0e0' }
-                    }
+                    y: { beginAtZero: true, grid: { color: th.grid }, ticks: { color: th.tick } },
+                    x: { grid: { display: false }, ticks: { color: th.tick } }
                 }
             }
         });

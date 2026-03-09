@@ -19,11 +19,11 @@ $activityLogs = getActivityLogs(100);
     <main class="container">
         <header class="page-header">
             <div>
-                <h1>⚡ Activity Log</h1>
+                <h1>Activity Log</h1>
                 <p>Real-time system and user activity — last 100 events</p>
             </div>
             <div class="page-header-actions">
-                <button class="btn btn-ghost btn-sm" onclick="exportLogs()">📥 Export</button>
+                <button class="btn btn-ghost btn-sm" onclick="exportLogs()">Export</button>
             </div>
         </header>
 

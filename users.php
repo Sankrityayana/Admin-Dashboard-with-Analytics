@@ -19,7 +19,7 @@ $users = getAllUsers();
     <main class="container">
         <header class="page-header">
             <div>
-                <h1>👥 User Management</h1>
+                <h1>User Management</h1>
                 <p>Manage all users, roles, and permissions</p>
             </div>
             <?php if (isSuperAdmin()): ?>

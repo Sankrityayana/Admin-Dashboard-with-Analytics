@@ -47,41 +47,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - <?php echo SITE_NAME; ?></title>
     <link rel="stylesheet" href="css/style.css">
+    <script>
+        (function(){
+            var t = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
 </head>
 <body class="login-page">
     <div class="login-container">
-        <div class="login-card">
-            <div class="login-header">
-                <span class="logo">📊</span>
-                <h1><?php echo SITE_NAME; ?></h1>
-                <p><?php echo SITE_TITLE; ?></p>
-            </div>
-            
-            <?php if ($error): ?>
-                <div class="alert alert-danger"><?php echo $error; ?></div>
-            <?php endif; ?>
-            
-            <form method="POST" action="" class="login-form">
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" name="username" class="form-control" required autofocus>
+        <!-- Left: branding panel -->
+        <div class="login-branding">
+            <div class="login-branding-icon">📊</div>
+            <h2><?php echo SITE_NAME; ?></h2>
+            <p><?php echo SITE_TITLE; ?></p>
+            <ul class="login-branding-features">
+                <li>Real-time analytics dashboard</li>
+                <li>User &amp; role management</li>
+                <li>Automated report generation</li>
+                <li>Activity monitoring &amp; logs</li>
+                <li>System settings &amp; configuration</li>
+            </ul>
+        </div>
+
+        <!-- Right: form panel -->
+        <div class="login-form-panel">
+            <div class="login-card">
+                <div class="login-header">
+                    <h1>Welcome back</h1>
+                    <p>Sign in to your account to continue</p>
                 </div>
-                
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control" required>
-                </div>
-                
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
-            </form>
-            
-            <div class="demo-credentials">
-                <h4>Demo Credentials:</h4>
-                <div class="credential-grid">
-                    <div><strong>Super Admin:</strong> superadmin / password</div>
-                    <div><strong>Admin:</strong> admin / password</div>
-                    <div><strong>Moderator:</strong> moderator / password</div>
-                    <div><strong>User:</strong> john_doe / password</div>
+
+                <?php if ($error): ?>
+                    <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
+                <?php endif; ?>
+
+                <form method="POST" action="" class="login-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" required autofocus>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </form>
+
+                <div class="demo-credentials">
+                    <h4>Demo credentials</h4>
+                    <div class="credential-grid">
+                        <div><strong>Super Admin:</strong> superadmin / password</div>
+                        <div><strong>Admin:</strong> admin / password</div>
+                        <div><strong>Moderator:</strong> moderator / password</div>
+                        <div><strong>User:</strong> john_doe / password</div>
+                    </div>
                 </div>
             </div>
         </div>

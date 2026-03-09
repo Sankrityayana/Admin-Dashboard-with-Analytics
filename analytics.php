@@ -23,13 +23,13 @@ $categories = ['sales', 'traffic', 'users', 'revenue', 'performance', 'engagemen
         <main class="container">
             <header class="page-header">
                 <div>
-                    <h1>📈 Analytics</h1>
+                    <h1>Analytics</h1>
                     <p>Monitor metrics, categories, and performance data</p>
                 </div>
             </header>
             <section class="card" aria-label="Analytics Filters">
                 <div class="card-header">
-                    <h3><span class="card-header-icon">🔍</span> Filter Data</h3>
+                    <h3>Filter Data</h3>
                 </div>
                 <div class="card-body">
                     <form method="GET" class="filters-form" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;align-items:end;">
@@ -59,7 +59,7 @@ $categories = ['sales', 'traffic', 'users', 'revenue', 'performance', 'engagemen
         
         <div class="card">
             <div class="card-header">
-                <h3><span class="card-header-icon">📊</span> Analytics Data</h3>
+                <h3>Analytics Data</h3>
                 <button class="btn btn-sm btn-success" onclick="exportData()">📥 Export</button>
             </div>
             <div class="card-body">

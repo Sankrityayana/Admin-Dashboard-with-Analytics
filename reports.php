@@ -19,11 +19,11 @@ $reports = getAllReports();
     <main class="container">
         <header class="page-header">
             <div>
-                <h1>📄 Reports</h1>
+                <h1>Reports</h1>
                 <p>View and manage generated reports</p>
             </div>
             <div class="page-header-actions">
-                <button class="btn btn-primary" onclick="generateReport()">📊 Generate Report</button>
+                <button class="btn btn-primary" onclick="generateReport()">Generate Report</button>
             </div>
         </header>
 

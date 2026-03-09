@@ -19,11 +19,11 @@ $notifications = getUserNotifications($_SESSION['user_id']);
     <main class="container">
         <header class="page-header">
             <div>
-                <h1>🔔 Notifications</h1>
+                <h1>Notifications</h1>
                 <p>Your latest alerts and system messages</p>
             </div>
             <div class="page-header-actions">
-                <button class="btn btn-ghost btn-sm" onclick="markAllAsRead()">✓ Mark All Read</button>
+                <button class="btn btn-ghost btn-sm" onclick="markAllAsRead()">Mark All Read</button>
             </div>
         </header>
 
