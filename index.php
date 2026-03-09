@@ -19,19 +19,19 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-        <?php include 'includes/navbar.php'; ?>
-        <main class="container">
-            <header class="page-header">
-                <div>
-                    <h1>Dashboard</h1>
-                    <p style="color:var(--text-secondary);font-size:1.1rem;">Welcome back, <?php echo $_SESSION['full_name']; ?>!</p>
-                </div>
-                <div class="header-actions">
-                    <span class="current-time" id="currentTime" aria-label="Current time"></span>
-                </div>
-            </header>
+    <?php include 'includes/navbar.php'; ?>
+    <main class="container">
+        <header class="page-header">
+            <div>
+                <h1>👋 Welcome back, <span><?php echo htmlspecialchars($_SESSION['full_name']); ?></span></h1>
+                <p>Here's what's happening with your dashboard today.</p>
+            </div>
+            <div class="page-header-actions">
+                <span class="current-time" id="currentTime" aria-label="Current time"></span>
+            </div>
+        </header>
 
-            <section aria-label="Statistics" class="stats-grid">
+        <section aria-label="Statistics" class="stats-grid">
                 <div class="stat-card stat-blue">
                     <div class="stat-icon-wrap">💰</div>
                     <div class="stat-info">
@@ -96,12 +96,12 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
                         <span class="stat-trend trend-stable">● Stable</span>
                     </div>
                 </div>
-            </section>
+        </section>
 
             <section aria-label="Charts" class="charts-row">
-                <div class="card">
+            <div class="card">
                     <div class="card-header">
-                        <h3 class="text-primary">Sales Overview</h3>
+                        <h3 class="text-primary"><span class="card-header-icon">📈</span> Sales Overview</h3>
                         <span class="badge badge-primary">Last 7 Days</span>
                     </div>
                     <div class="card-body">
@@ -110,9 +110,9 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
                         </div>
                     </div>
                 </div>
-                <div class="card">
+            <div class="card">
                     <div class="card-header">
-                        <h3 class="text-purple">Traffic Analytics</h3>
+                        <h3 class="text-purple"><span class="card-header-icon">🌐</span> Traffic Analytics</h3>
                         <span class="badge badge-purple">Last 7 Days</span>
                     </div>
                     <div class="card-body">
@@ -121,13 +121,13 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
                         </div>
                     </div>
                 </div>
-            </section>
+        </section>
 
-            <section class="bottom-row">
+        <section class="bottom-row">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="text-success">User Statistics</h3>
-                        <a href="users.php" class="btn btn-sm btn-ghost">View All</a>
+                        <h3 class="text-success"><span class="card-header-icon">👥</span> User Statistics</h3>
+                        <a href="users.php" class="btn btn-sm btn-ghost">View All →</a>
                     </div>
                     <div class="card-body">
                         <div class="user-stats-grid">
@@ -140,10 +140,10 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
                         </div>
                     </div>
                 </div>
-                <div class="card">
+            <div class="card">
                     <div class="card-header">
-                        <h3 class="text-warning">Recent Activity</h3>
-                        <a href="activity.php" class="btn btn-sm btn-ghost">View All</a>
+                        <h3 class="text-warning"><span class="card-header-icon">⚡</span> Recent Activity</h3>
+                        <a href="activity.php" class="btn btn-sm btn-ghost">View All →</a>
                     </div>
                     <div class="card-body">
                         <div class="activity-list">
@@ -160,8 +160,8 @@ $trafficData = getAnalyticsByMetric('Page Views', 7);
                         </div>
                     </div>
                 </div>
-            </section>
-        </main>
+        </section>
+    </main>
     
     <script src="js/dashboard.js"></script>
     <script>

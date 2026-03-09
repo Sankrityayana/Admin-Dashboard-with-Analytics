@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main class="container">
         <header class="page-header">
             <div>
-                <h1>System Settings</h1>
+                <h1>⚙️ System Settings</h1>
                 <p>Configure and manage application preferences</p>
             </div>
         </header>
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="POST">
             <div class="card">
                 <div class="card-header">
-                    <h3>General Settings</h3>
+                    <h3><span class="card-header-icon">🛠️</span> General Settings</h3>
                 </div>
                 <div class="card-body">
                     <?php while ($setting = mysqli_fetch_assoc($settings)): ?>

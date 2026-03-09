@@ -19,16 +19,18 @@ $activityLogs = getActivityLogs(100);
     <main class="container">
         <header class="page-header">
             <div>
-                <h1>Activity Log</h1>
-                <p>Real-time system and user activity feed</p>
+                <h1>⚡ Activity Log</h1>
+                <p>Real-time system and user activity — last 100 events</p>
             </div>
-            <button class="btn btn-ghost" onclick="exportLogs()">📥 Export Logs</button>
+            <div class="page-header-actions">
+                <button class="btn btn-ghost btn-sm" onclick="exportLogs()">📥 Export</button>
+            </div>
         </header>
 
         <div class="card">
             <div class="card-header">
-                <h3>Recent Events</h3>
-                <span class="badge badge-primary">Last 100</span>
+                <h3><span class="card-header-icon">📜</span> Events</h3>
+                <span class="badge badge-secondary">Last 100</span>
             </div>
             <div class="card-body">
                 <div class="activity-list">
